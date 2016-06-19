@@ -1,5 +1,9 @@
 # Dao::Repository
 
+[![Build Status](https://travis-ci.org/dao-rb/dao-repository.svg?branch=master)](https://travis-ci.org/dao-rb/dao-repository)
+[![Code Climate](https://codeclimate.com/github/dao-rb/dao-repository/badges/gpa.svg)](https://codeclimate.com/github/dao-rb/dao-repository)
+[![Test Coverage](https://codeclimate.com/github/dao-rb/dao-repository/badges/coverage.svg)](https://codeclimate.com/github/dao-rb/dao-repository)
+
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/dao/repository`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 TODO: Delete this and the text above, and describe your gem
