@@ -14,11 +14,11 @@ module Dao
         import(object, associations)
       end
 
-      def save!(domain, attributes)
+      def save!(_domain, _attributes)
         fail 'not implemented'
       end
 
-      def chain(scope, method_name, args, &block)
+      def chain(_scope, _method_name, _args, &_block)
         fail 'not implemented'
       end
 
@@ -26,7 +26,7 @@ module Dao
         raise RelationsNotSupported
       end
 
-      def with_transaction(&block)
+      def with_transaction(&_block)
         raise TransactionNotSupported
       end
 
@@ -36,15 +36,15 @@ module Dao
 
       protected
 
-      def export(base, record = nil)
+      def export(_base, _record = nil)
         fail 'not implemented'
       end
 
-      def import(relation, associations)
+      def import(_relation, _associations)
         fail 'not implemented'
       end
 
-      def record(domain_id)
+      def record(_domain_id)
         fail 'not implemented'
       end
 

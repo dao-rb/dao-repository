@@ -45,8 +45,6 @@ module Dao
         scope.respond_to?(method_name, include_private) || super
       end
 
-      private
-
       def extract_relations(options)
         if options[:with]
           Array([options.delete(:with)]).flatten.compact
