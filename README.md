@@ -4,10 +4,6 @@
 [![Code Climate](https://codeclimate.com/github/dao-rb/dao-repository/badges/gpa.svg)](https://codeclimate.com/github/dao-rb/dao-repository)
 [![Test Coverage](https://codeclimate.com/github/dao-rb/dao-repository/badges/coverage.svg)](https://codeclimate.com/github/dao-rb/dao-repository/coverage)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/dao/repository`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -26,7 +22,41 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+
+require 'dao/entity'
+require 'dao/repository'
+require 'dao/gateway/active_record'
+
+class Comment < ApplicationRecord
+end
+
+class Post < ApplicationRecord
+  has_many :comments
+end
+
+class CommentEntity < Dao::Entity::Base
+  attribute :body, String
+end
+
+class PostEntity < Dao::Entity::Base
+  attribute :id,       Integer
+  attribute :body,     String
+  
+  attribute :comments, Array[CommentEntity]
+end
+
+class PostRepository < Dao::Repository::Base
+  entity PostEntity
+  gateway Dao::Gateway::ActiveRecord::Base, Post, Dao::Gateway::ActiveRecord::BaseTransformer
+end
+
+post = PostRepository.last(with: :comments)
+
+post.id # => 1
+post.body # => "Post body"
+post.comments # => [#<CommentEntity:0x007ffdcb923a30>]
+```
 
 ## Development
 
@@ -36,10 +66,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/dao-repository.
+Bug reports and pull requests are welcome on GitHub at https://github.com/dao-rb/dao-repository.
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
