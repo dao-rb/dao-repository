@@ -16,6 +16,10 @@ module Dao
           end
         end
 
+        def all
+          scope.all.apply
+        end
+
         def find(id, with: nil)
           attributes = {}
           attributes[:with] = with if with
