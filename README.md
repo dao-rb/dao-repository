@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/dao-rb/dao-repository.svg?branch=master)](https://travis-ci.org/dao-rb/dao-repository)
 [![Code Climate](https://codeclimate.com/github/dao-rb/dao-repository/badges/gpa.svg)](https://codeclimate.com/github/dao-rb/dao-repository)
-[![Test Coverage](https://codeclimate.com/github/dao-rb/dao-repository/badges/coverage.svg)](https://codeclimate.com/github/dao-rb/dao-repository/coverage)
+[![Test Coverage](https://codeclimate.com/repos/5777e091620b91007d0001e3/badges/c01a62725cb50df7d9f9/coverage.svg)](https://codeclimate.com/repos/5777e091620b91007d0001e3/coverage)
 
 ## Installation
 
