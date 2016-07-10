@@ -20,11 +20,30 @@ And then execute:
 Or install it yourself as:
 
     $ gem install dao-repository
+    
+## Built-in methods
 
-## Usage
+Repositories in dao-rb are objects that allow you map your data into entities and save them through data gateway.
 
-```
+Basic methods of each repository:
 
+1. `Repository.all` should return all data.
+2. `Repository.find` should find entity with given id. You can return entity with its relations by adding a list of them into the second argument (`Repository.find(1, with: [:author, :comments])`), but your gateway should support eager loading. If entity was not found then method will raise an exception.
+3. `Repository.find_by_id` also should find entity with given id, but if it was not found then method return `nil`.
+4. `Repository.last` should return last entity. You can return entity with its relations by adding a list of them into the first argument (`Repository.last(with: [:author, :comments])`), but your gateway should support eager loading.
+5. `Repository.count` should return count of entities.
+6. `Repository.build` should build entity from data object.
+7. `Repository.save` should save changes in entity.
+8. `Repository.save_all` should save collection of entities.
+9. `Repository.delete` should delete entity.
+10. `Repository.delete_by_id` should delete entity by id.
+11. `Repository.with_transaction(&block)` execute block in transaction if gateway support it.
+12. `Repository.by_criteria` should return entities by given criteria.
+13. `Repository.by_criteria_count` should return count of elements by given criteria.
+
+## Usage example
+
+```ruby
 require 'dao/entity'
 require 'dao/repository'
 require 'dao/gateway/active_record'
@@ -57,6 +76,27 @@ post = PostRepository.last(with: :comments)
 post.id # => 1
 post.body # => "Post body"
 post.comments # => [#<CommentEntity:0x007ffdcb923a30>]
+```
+
+## Custom methods
+
+You can define custom methods in your repository:
+
+```ruby
+class Post < ApplicationRecord
+  has_many :comments
+  
+  scope :deleted, -> { where(deleted: true) }
+end
+
+class PostRepository < Dao::Repository::Base
+  entity PostEntity
+  gateway Dao::Gateway::ActiveRecord::Base, Post, Dao::Gateway::ActiveRecord::BaseTransformer
+  
+  def self.deleted
+    scope.deleted(with: :comments).apply # it will return deleted posts with loaded comments.
+  end
+end
 ```
 
 ## Development
