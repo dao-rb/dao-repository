@@ -67,11 +67,11 @@ module Dao
         end
 
         def by_criteria(criteria)
-          criteria.filter(scope).apply
+          criteria.filter(scope)
         end
 
         def by_criteria_count(criteria)
-          criteria.count_of_result_items(scope).apply
+          criteria.count_of_result_items(scope)
         end
 
         protected
