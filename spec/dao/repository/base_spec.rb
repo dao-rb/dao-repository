@@ -1,5 +1,3 @@
-require 'dao/gateway'
-
 describe Dao::Repository::Base do
   let(:transformer) { Dao::Gateway::ScopeTransformer }
   let(:gateway) { Dao::Gateway::Base }
