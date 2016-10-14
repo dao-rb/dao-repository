@@ -9,9 +9,8 @@ module Dao
         @with = []
       end
 
-      def method_missing(method_name, *args, **options, &block)
-        with = extract_relations(options)
-        args << options if options.any?
+      def method_missing(method_name, *args, &block)
+        with = extract_with(args)
 
         add_relations(with) if with.any?
 
@@ -45,11 +44,27 @@ module Dao
         scope.respond_to?(method_name, include_private) || super
       end
 
-      def extract_relations(options)
-        if options[:with]
-          Array([options.delete(:with)]).flatten.compact
+      def extract_with(args)
+        if have_with_option?(args)
+          with = extract_with_option(args)
+
+          Array([with]).flatten.compact
         else
           []
+        end
+      end
+
+      def have_with_option?(args)
+        options = args.last
+
+        options.is_a?(Hash) && options[:with]
+      end
+
+      def extract_with_option(args)
+        options = args.pop
+
+        options.delete(:with).tap do
+          args << options unless options.empty?
         end
       end
     end
