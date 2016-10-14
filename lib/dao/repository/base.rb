@@ -21,9 +21,11 @@ module Dao
         end
 
         def find(id, with: nil)
-          attributes = {}
-          attributes[:with] = with if with
-          scope.find(id, attributes).apply
+          if with
+            scope.find(id, with: with).apply
+          else
+            scope.find(id).apply
+          end
         end
 
         def find_by_id(id)
@@ -31,9 +33,11 @@ module Dao
         end
 
         def last(with: nil)
-          attributes = {}
-          attributes[:with] = with if with
-          scope.last(attributes).apply
+          if with
+            scope.last(with: with).apply
+          else
+            scope.last.apply
+          end
         end
 
         def count

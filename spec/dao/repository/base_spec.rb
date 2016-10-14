@@ -1,3 +1,4 @@
+
 describe Dao::Repository::Base do
   let(:transformer) { Dao::Gateway::ScopeTransformer }
   let(:gateway) { Dao::Gateway::Base }
@@ -41,7 +42,7 @@ describe Dao::Repository::Base do
 
   describe '.find' do
     it 'should call scope' do
-      expect_any_instance_of(Dao::Repository::Scope).to receive(:find).with(1, {}).and_return(spy)
+      expect_any_instance_of(Dao::Repository::Scope).to receive(:find).with(1).and_return(spy)
 
       repository.find(1)
     end
@@ -63,7 +64,7 @@ describe Dao::Repository::Base do
 
   describe '.last' do
     it 'should call scope' do
-      expect_any_instance_of(Dao::Repository::Scope).to receive(:last).with({}).and_return(spy)
+      expect_any_instance_of(Dao::Repository::Scope).to receive(:last).with(no_args).and_return(spy)
 
       repository.last
     end
