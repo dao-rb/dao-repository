@@ -19,8 +19,8 @@ module Dao
         self
       end
 
-      def with(*args)
-        add_relations(args)
+      def with(relations, options = {})
+        add_relations(relations, options)
 
         self
       end
@@ -35,9 +35,9 @@ module Dao
 
       private
 
-      def add_relations(args)
-        @scope = @gateway.add_relations(scope, args)
-        @with += @gateway.serializable_relations(args)
+      def add_relations(relations, options = {})
+        @scope = @gateway.add_relations(scope, relations, options)
+        @with += @gateway.serializable_relations(relations)
       end
 
       def respond_to?(method_name, include_private = false)
