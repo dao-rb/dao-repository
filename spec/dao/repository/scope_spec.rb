@@ -13,7 +13,7 @@ describe Dao::Repository::Scope do
 
     it 'should add with' do
       expect(gateway).to receive(:chain).with(anything, method_name, [1])
-      expect(gateway).to receive(:add_relations).with(anything, [2])
+      expect(gateway).to receive(:add_relations).with(anything, [2], {})
 
       scope.send(method_name, 1, with: 2)
     end
@@ -21,7 +21,7 @@ describe Dao::Repository::Scope do
     context 'when arguments was not specified' do
       it 'should add with and call without arguments' do
         expect(gateway).to receive(:chain).with(anything, method_name, [])
-        expect(gateway).to receive(:add_relations).with(anything, [2])
+        expect(gateway).to receive(:add_relations).with(anything, [2], {})
 
         scope.send(method_name, with: 2)
       end
@@ -39,7 +39,7 @@ describe Dao::Repository::Scope do
     context 'when options have additional values' do
       it 'should add with and call with other options' do
         expect(gateway).to receive(:chain).with(anything, method_name, [{ foo: :bar }])
-        expect(gateway).to receive(:add_relations).with(anything, [{bar: :foo}])
+        expect(gateway).to receive(:add_relations).with(anything, [{bar: :foo}], {})
 
         scope.send(method_name, foo: :bar, with: { bar: :foo })
       end
@@ -48,7 +48,7 @@ describe Dao::Repository::Scope do
     context 'when have argument and options have additional values' do
       it 'should add with and call with other options' do
         expect(gateway).to receive(:chain).with(anything, method_name, [1, { foo: :bar }])
-        expect(gateway).to receive(:add_relations).with(anything, [{bar: :foo}])
+        expect(gateway).to receive(:add_relations).with(anything, [{bar: :foo}], {})
 
         scope.send(method_name, 1, foo: :bar, with: { bar: :foo })
       end
