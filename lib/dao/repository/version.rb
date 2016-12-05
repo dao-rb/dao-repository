@@ -1,5 +1,5 @@
 module Dao
   module Repository
-    VERSION = '1.1.2'
+    VERSION = '1.4.0'
   end
 end
