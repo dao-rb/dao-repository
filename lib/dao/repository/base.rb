@@ -71,7 +71,9 @@ module Dao
         end
 
         def with_lock(id)
-          gateway.with_lock(id)
+          gateway.with_lock(id) do
+            yield
+          end
         end
 
         def by_criteria(criteria)
