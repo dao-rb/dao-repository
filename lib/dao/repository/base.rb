@@ -70,6 +70,10 @@ module Dao
           gateway.with_transaction(&block)
         end
 
+        def with_lock(id)
+          gateway.with_lock(id)
+        end
+
         def by_criteria(criteria)
           criteria.filter(scope)
         end
