@@ -70,8 +70,8 @@ module Dao
           gateway.with_transaction(&block)
         end
 
-        def with_lock(id, &block)
-          gateway.with_lock(id, &block)
+        def with_lock(id, *args, &block)
+          gateway.with_lock(id, *args, &block)
         end
 
         def by_criteria(criteria)
