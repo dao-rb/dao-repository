@@ -38,7 +38,7 @@ Basic methods of each repository:
 9. `Repository.delete` should delete entity.
 10. `Repository.delete_by_id` should delete entity by id.
 11. `Repository.with_transaction(&block)` execute block in transaction if gateway support it.
-12. `Repository.with_lock(id, &block)` in transaction: lock db record with given id, execute block if gateway support it.
+12. `Repository.with_lock(id, *args, &block)` in transaction: locks (with given arguments) db record with given id, execute block if gateway support it.
 13. `Repository.by_criteria` should return entities by given criteria.
 14. `Repository.by_criteria_count` should return count of elements by given criteria.
 
